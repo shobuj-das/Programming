@@ -98,3 +98,25 @@
 #
 # ============================================================
 
+def is_duplicate_found(sub_string):
+    for x in range(len(sub_string)-1):
+        for y in range((x+1),len(sub_string)):
+            if sub_string[x] == sub_string[y]:
+                return False
+    return True
+
+def longest_sub_string(text):
+    sub_string_len = []
+    x = 0
+    y = len(text)-1
+    for i in range(len(text)):
+        for j in range(len(text),0,-1):
+            k = j*-1
+            sub = text[i,k]
+            print(f"{sub} == {is_duplicate_found(sub)}")
+
+
+longest_sub_string("assfbcdefadf")
+
+
+# abcdd
