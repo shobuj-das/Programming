@@ -105,15 +105,34 @@ def has_duplicate(sub_string):
                 return True
     return False
 
-def longest_sub_string(text):
-
+def longest_substring(text):
+    max_len = 0
     for i in range(len(text)):
         for j in range(i+1,len(text)+1):
             sub = text[i:j]
-            print(f"{sub} == {has_duplicate(sub)}")
+            if not has_duplicate(sub_string=sub):
+                max_len = max(max_len, len(sub))
+
+    return max_len
 
 
-longest_sub_string("assfbcdefadf")
+
+if __name__=="__main__":
+    print(longest_substring("abcabcbb"))       # 3
+    print(longest_substring("bbbbb"))          # 1
+    print(longest_substring("pwwkew"))         # 3
+    print(longest_substring(""))               # 0
+    print(longest_substring("a"))              # 1
+    print(longest_substring("au"))             # 2
+    print(longest_substring("dvdf"))           # 3
+    print(longest_substring("abba"))           # 2
+    print(longest_substring("abcdef"))         # 6
+    print(longest_substring("aab"))            # 2
+    print(longest_substring("abcadef"))        # 6
+    print(longest_substring("123451234"))      # 5
+    print(longest_substring("!@#!$"))          # 3
+    print(longest_substring(" "))              # 1
+    print(longest_substring("abc def"))        # 7
 
 
 # abcdd
