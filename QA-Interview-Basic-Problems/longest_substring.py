@@ -117,34 +117,58 @@ def longest_substring(text):
     return max_len
 
 # ---- using sliding window method
-def remvove_duplicate_from_window(window):
-    
+def remove_duplicate_from_window(window, ch):
+    while ch in window:
+        window.pop(0)
+
+    return window
 
 def longest_sub_string_using_sliding_window(text):
-    window = {}
+    window = []
     max_len = 0
     for ch in text:
         if ch not in window:
-            window.add(ch)
+            window.append(ch)
         else:
+            window = remove_duplicate_from_window(window,ch)
+            window.append(ch)
 
+        max_len = max(max_len, len(window))
+
+    return max_len
 
 if __name__=="__main__":
-    print(longest_substring("abcabcbb"))       # 3
-    print(longest_substring("bbbbb"))          # 1
-    print(longest_substring("pwwkew"))         # 3
-    print(longest_substring(""))               # 0
-    print(longest_substring("a"))              # 1
-    print(longest_substring("au"))             # 2
-    print(longest_substring("dvdf"))           # 3
-    print(longest_substring("abba"))           # 2
-    print(longest_substring("abcdef"))         # 6
-    print(longest_substring("aab"))            # 2
-    print(longest_substring("abcadef"))        # 6
-    print(longest_substring("123451234"))      # 5
-    print(longest_substring("!@#!$"))          # 3
-    print(longest_substring(" "))              # 1
-    print(longest_substring("abc def"))        # 7
+    # print(longest_substring("abcabcbb"))       # 3
+    # print(longest_substring("bbbbb"))          # 1
+    # print(longest_substring("pwwkew"))         # 3
+    # print(longest_substring(""))               # 0
+    # print(longest_substring("a"))              # 1
+    # print(longest_substring("au"))             # 2
+    # print(longest_substring("dvdf"))           # 3
+    # print(longest_substring("abba"))           # 2
+    # print(longest_substring("abcdef"))         # 6
+    # print(longest_substring("aab"))            # 2
+    # print(longest_substring("abcadef"))        # 6
+    # print(longest_substring("123451234"))      # 5
+    # print(longest_substring("!@#!$"))          # 3
+    # print(longest_substring(" "))              # 1
+    # print(longest_substring("abc def"))        # 7
 
+
+    # print(longest_sub_string_using_sliding_window("abcabcbb"))
+    print(longest_sub_string_using_sliding_window("bbbbb"))          # 1
+    print(longest_sub_string_using_sliding_window("pwwkew"))         # 3
+    print(longest_sub_string_using_sliding_window(""))               # 0
+    print(longest_sub_string_using_sliding_window("a"))              # 1
+    print(longest_sub_string_using_sliding_window("au"))             # 2
+    print(longest_sub_string_using_sliding_window("dvdf"))           # 3
+    print(longest_sub_string_using_sliding_window("abba"))           # 2
+    print(longest_sub_string_using_sliding_window("abcdef"))         # 6
+    print(longest_sub_string_using_sliding_window("aab"))            # 2
+    print(longest_sub_string_using_sliding_window("abcadef"))        # 6
+    print(longest_sub_string_using_sliding_window("123451234"))      # 5
+    print(longest_sub_string_using_sliding_window("!@#!$"))          # 3
+    print(longest_sub_string_using_sliding_window(" "))              # 1
+    print(longest_sub_string_using_sliding_window("abc def"))        # 7
 
 # abcdd
