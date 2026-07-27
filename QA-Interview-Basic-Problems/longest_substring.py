@@ -98,6 +98,7 @@
 #
 # ============================================================
 
+# --- using brute force method
 def has_duplicate(sub_string):
     for x in range(len(sub_string)-1):
         for y in range((x+1),len(sub_string)):
@@ -115,6 +116,17 @@ def longest_substring(text):
 
     return max_len
 
+# ---- using sliding window method
+def remvove_duplicate_from_window(window):
+    
+
+def longest_sub_string_using_sliding_window(text):
+    window = {}
+    max_len = 0
+    for ch in text:
+        if ch not in window:
+            window.add(ch)
+        else:
 
 
 if __name__=="__main__":
