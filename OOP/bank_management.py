@@ -92,10 +92,10 @@
 
 
 class BankAccount:
-    def __int__(self, account_number, account_holder, balance, transaction_history):
+    def __int__(self, account_number, account_holder, transaction_history):
         self.acc_number = account_number
-        self.acc_holder = self.acc_holder
-        self.balance = balance
+        self.acc_holder = account_holder
+        self.balance = 0
         self.acc_transaction_history = transaction_history
 
     def __str__(self):
@@ -118,7 +118,7 @@ class Bank:
             self.acc_list.remove(acc)
             print("Account removed succesfully")
 
-            
+
     def search_account(self, account_number):
         if self.acc_list is None:
             print("No account found")
@@ -129,8 +129,12 @@ class Bank:
                 return account
         print("Account not found")
         return None
-#
-# deposit(account_number, amount)
+
+    def deposit(self, account_number, amount):
+        acc = self.search_account(account_number)
+        if acc is not None:
+            acc.balance += amount
+            print("Deposite Success")
 #
 # withdraw(account_number, amount)
 #
