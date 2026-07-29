@@ -90,6 +90,7 @@
 #
 # ============================================================
 
+import datetime
 
 class BankAccount:
     def __init__(self, account_number, account_holder):
@@ -107,6 +108,7 @@ class BankAccount:
 class Bank:
     def __init__(self):
         self.acc_list = []
+        self.transaction_history = []
 
     def add_account(self,account):
         self.acc_list.append(account)
@@ -135,6 +137,7 @@ class Bank:
         if acc is not None:
             acc.balance += amount
             print("Deposite Success")
+            self.add_transaction_history('deposite',from_acc=account_number,amount=amount)
 
 
     def withdraw(self,account_number, amount):
@@ -146,7 +149,7 @@ class Bank:
             
             acc.balance -= amount
             print(f"Balance withdraw success\nCurren Balance: {acc.balance}")
-
+            self.add_transaction_history("withdraw", from_acc=account_number, amount=amount)
 
     def transfer(self, from_account, to_account, amount):
         from_acc = self.search_account(from_account)
@@ -160,12 +163,52 @@ class Bank:
                 from_acc.balance -= amount
                 to_acc.balance += amount
                 print("Money transfer successful")
+                self.add_transaction_history("transfer", from_acc=from_account, to_acc=to_account,amount=amount)
 
-#
-# display_account(account_number)
-#
-# display_all_accounts()
+    def display_account(self, account_number):
+        acc = self.search_account(account_number=account_number)
+        print(acc)
 
+
+    def display_all_accounts(self):
+        for acc in self.acc_list:
+            print(acc)
+
+    def add_transaction_history(self, type, from_acc=None, to_acc = None, amount=0):
+        
+        if type == 'deposite':
+            trx = {
+                "trx_type" : type,
+                "trx_acc_number": from_acc,
+                "trx_date_time": datetime.datetime.today(),
+                "trx_amount" :amount
+            }
+
+            self.transaction_history.append(trx)
+
+        elif type == 'withdraw':
+            trx = {
+                "trx_type": type,
+                "trx_acc_number" : from_acc,
+                "trx_date_time" : datetime.datetime.today(),
+                "trx_amount" : amount
+
+            }
+            self.transaction_history.append(trx)
+
+        elif type == "transfer":
+            trx = {
+                "trx_type": type,
+                "trx_from_acc_number" : from_acc,
+                "trx_to_acc_number" : to_acc,
+                "trx_date_time" : datetime.datetime.today(),
+                "trx_amount" : amount
+            }            
+            self.transaction_history.append(trx)
+
+    def display_all_transaction_history(self):
+        for trx in self.transaction_history:
+            print(trx)
 
 if __name__=="__main__":
     acc1 = BankAccount(101, "Alex")
@@ -183,4 +226,7 @@ if __name__=="__main__":
     bank.withdraw(101,10000)
 
     bank.transfer(101,102,400)
-    
+
+    bank.display_account(101)
+
+    bank.display_all_transaction_history()
