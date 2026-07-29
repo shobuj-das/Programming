@@ -92,11 +92,10 @@
 
 
 class BankAccount:
-    def __int__(self, account_number, account_holder, transaction_history):
+    def __init__(self, account_number, account_holder):
         self.acc_number = account_number
         self.acc_holder = account_holder
         self.balance = 0
-        self.acc_transaction_history = transaction_history
 
     def __str__(self):
         return(
@@ -130,16 +129,58 @@ class Bank:
         print("Account not found")
         return None
 
+
     def deposit(self, account_number, amount):
         acc = self.search_account(account_number)
         if acc is not None:
             acc.balance += amount
             print("Deposite Success")
-#
-# withdraw(account_number, amount)
-#
-# transfer(from_account, to_account, amount)
+
+
+    def withdraw(self,account_number, amount):
+        acc = self.search_account(account_number)
+        if acc is not None:
+            if acc.balance < amount:
+                print("Insufficent balance")
+                return
+            
+            acc.balance -= amount
+            print(f"Balance withdraw success\nCurren Balance: {acc.balance}")
+
+
+    def transfer(self, from_account, to_account, amount):
+        from_acc = self.search_account(from_account)
+        to_acc = self.search_account(to_account)
+
+        if from_acc and to_acc is not None:
+            if from_acc.balance < amount:
+                print("Insuffiecent balance")
+                return
+            else:
+                from_acc.balance -= amount
+                to_acc.balance += amount
+                print("Money transfer successful")
+
 #
 # display_account(account_number)
 #
 # display_all_accounts()
+
+
+if __name__=="__main__":
+    acc1 = BankAccount(101, "Alex")
+    acc2 = BankAccount(102, "Bob")
+    acc3 = BankAccount(103, "Shobuj")
+
+    bank = Bank()
+    bank.add_account(acc1)
+    bank.add_account(acc2)
+    bank.add_account(acc3)
+
+    bank.deposit(101, 2000)
+    bank.deposit(103, 5000)
+
+    bank.withdraw(101,10000)
+
+    bank.transfer(101,102,400)
+    
