@@ -201,7 +201,7 @@ class Bank:
                 "trx_type": type,
                 "trx_from_acc_number" : from_acc,
                 "trx_to_acc_number" : to_acc,
-                "trx_date_time" : datetime.datetime.today(),
+                "trx_date_time" : datetime.datetime.now(),
                 "trx_amount" : amount
             }            
             self.transaction_history.append(trx)
