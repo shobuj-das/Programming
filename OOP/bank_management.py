@@ -180,7 +180,7 @@ class Bank:
             trx = {
                 "trx_type" : type,
                 "trx_acc_number": from_acc,
-                "trx_date_time": datetime.datetime.today(),
+                "trx_date_time": datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"),
                 "trx_amount" :amount
             }
 
@@ -190,7 +190,7 @@ class Bank:
             trx = {
                 "trx_type": type,
                 "trx_acc_number" : from_acc,
-                "trx_date_time" : datetime.datetime.today(),
+                "trx_date_time" : datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S"),
                 "trx_amount" : amount
 
             }
@@ -201,7 +201,7 @@ class Bank:
                 "trx_type": type,
                 "trx_from_acc_number" : from_acc,
                 "trx_to_acc_number" : to_acc,
-                "trx_date_time" : datetime.datetime.now(),
+                "trx_date_time" : datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "trx_amount" : amount
             }            
             self.transaction_history.append(trx)
